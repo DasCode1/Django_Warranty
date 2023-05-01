@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from myapp.models import Customer
 
 # Create your views here.
 
@@ -9,13 +10,10 @@ def login_check(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+                
+    all_customers = Customer.objects.all()
 
-        # Validate the username and password here
-
-        print(request.POST)
-
-        # Redirect the user to the welcome page
-        if (username!= None):
+    for customer in all_customers:
+        if(customer.usernane = username and customer.check_password(password)):
             return render(request,'warranty_end_user/welcome.html',{})
-        else:
-            return render('warranty_end_user/no_user.html')
+
